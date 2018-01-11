@@ -1,0 +1,25 @@
+<% @news.each do |news| %>    
+    <div class="news">
+      <div class="row">
+        <div class="col-xs-10 content">
+          <div class="row">
+            <div class="col-xs-2">
+              <h5 class="date"><span class="glyphicon glyphicon-calendar"></span> <%= news.created_at.strftime("%d.%m.%Y %H:%M") %></h5>
+            </div>
+            <div class="col-xs-10">
+              <h5><span class="glyphicon glyphicon-user"></span>
+              <%= I18n.t('topics.author') %>:
+              <%= news.user.name %>
+              <%= news.user.surname %>
+              </h5>
+            </div>
+          </div>
+          <h2> <%= news.title %> </h2>
+          <hr class="black-separator">
+          <p> <%= simple_format news.content %> </p>
+        </div>
+      </div>
+    </div>
+<% end %>
+    
+    

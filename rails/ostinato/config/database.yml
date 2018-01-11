@@ -1,0 +1,18 @@
+development: &default
+  adapter: postgresql
+  database: ostinato_development
+  encoding: utf8
+  min_messages: warning
+  pool: 5
+  timeout: 5000
+
+test:
+  <<: *default
+  database: ostinato_test
+
+production: &deploy
+  encoding: utf8
+  database: ostinato_production
+  min_messages: warning
+  pool: 5
+  timeout: 5000

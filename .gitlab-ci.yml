@@ -1,0 +1,26 @@
+image: "ruby:2.4.0"
+
+services:
+  - postgres:9.5
+
+variables:
+  POSTGRES_DB: ostinato_test
+
+before_script:
+  - apt-get update -qq 
+  - apt-get -yqq install nodejs
+  - ruby -v
+  - gem install bundler --no-ri --no-rdoc
+  - cd rails/ostinato
+  - bundle install -j $(nproc)
+  - cp config/database.yml.gitlab config/database.yml
+  - RAILS_ENV=test bundle exec rake db:setup
+  - RAILS_ENV=test bundle exec rake db:migrate
+
+rspec:
+  script:
+    - bundle exec rspec
+
+rubocop:
+  script:
+    - bundle exec rubocop
